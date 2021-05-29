@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.js"></script>
+</head>
+<body>
+<script>
+    var data = {name: 'zhangsan', age: 19};
+
+    $.ajax({
+        url: 'p/1221?page=4',
+        data: JSON.stringify(data),
+        contentType: 'application/json;charset=UTF-8',
+        dataType: 'json',
+        method: 'post',
+        success: function (res) {
+            console.log(res);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    })
+</script>
+</body>
+</html>
