@@ -40,7 +40,7 @@ public class JDBCController {
 
     @RequestMapping(value = "/user/add", method = RequestMethod.GET)
     public void addUser() {
-        String sql = "insert into User (id, name ,age) values (2,'zhangsan', '10')";
+        String sql = "insert into User (id, name ,age) values (2,'zhangsan', 10)";
         jdbcTemplate.update(sql);
     }
 
@@ -49,7 +49,7 @@ public class JDBCController {
         String sql = "update User set name=?, age=?where id=" + id;
         Object[] objects = new Object[2];
         objects[0] = "lisi";
-        objects[1] = "19";
+        objects[1] = 19;
         jdbcTemplate.update(sql, objects);
     }
 
