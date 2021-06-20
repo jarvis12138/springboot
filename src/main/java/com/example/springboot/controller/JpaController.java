@@ -27,4 +27,9 @@ public class JpaController {
         return all;
     }
 
+    @RequestMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
+
 }

@@ -1,8 +1,13 @@
 package com.example.springboot;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTCreator;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.springboot.mapper.ProductCategoryMapper;
 import com.example.springboot.model.ProductCategory;
+import com.example.springboot.utils.JWTUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +70,23 @@ class SpringbootApplicationTests {
     void selectByCategoryId() throws Exception {
         ProductCategory productCategory = productCategoryMapper.selectByCategoryId(4);
         System.out.println(productCategory);
+    }
+
+    @Test
+    void createJWT() throws Exception {
+        Calendar instance = Calendar.getInstance();
+        instance.add(Calendar.DATE, 7);
+        JWTCreator.Builder builder = JWT.create();
+
+        builder.withClaim("name", "zhagnsna");
+        builder.withClaim("id", "123");
+
+        String token = builder.withExpiresAt(instance.getTime())
+                .sign(Algorithm.HMAC256("SIGN"));
+
+        System.out.println(token);
+        DecodedJWT verify = JWT.require(Algorithm.HMAC256("SIGN")).build().verify(token);
+        System.out.println(verify.getClaim("name").asString());
     }
 
 }
