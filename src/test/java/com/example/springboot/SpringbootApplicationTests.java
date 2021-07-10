@@ -11,6 +11,7 @@ import com.example.springboot.utils.JWTUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -40,11 +41,13 @@ class SpringbootApplicationTests {
     }
 
     @Test
+    @Transactional
     void insertByMap() throws Exception {
         Map<String, Object> map = new HashMap<>();
         map.put("cId", 5);
         map.put("name", "5");
         productCategoryMapper.insertByMap(map);
+        int a = 1 / 0;
         System.out.println();
     }
 
