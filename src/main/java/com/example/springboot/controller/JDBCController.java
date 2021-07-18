@@ -4,12 +4,14 @@ import com.example.springboot.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import javax.validation.groups.Default;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +48,7 @@ public class JDBCController {
 //    }
 
     @RequestMapping(value = "/user/add", method = RequestMethod.GET)
-    public String addUser(@Valid User user) {
+    public String addUser(@Validated({User.Update.class, Default.class}) User user) {
         return user.toString();
     }
 
