@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -38,10 +39,15 @@ public class JDBCController {
 //        return maps;
 //    }
 
+//    @RequestMapping(value = "/user/add", method = RequestMethod.GET)
+//    public void addUser() {
+//        String sql = "insert into User (id, name ,age) values (2,'zhangsan', 10)";
+//        jdbcTemplate.update(sql);
+//    }
+
     @RequestMapping(value = "/user/add", method = RequestMethod.GET)
-    public void addUser() {
-        String sql = "insert into User (id, name ,age) values (2,'zhangsan', 10)";
-        jdbcTemplate.update(sql);
+    public String addUser(@Valid User user) {
+        return user.toString();
     }
 
     @RequestMapping(value = "/user/update/{id}", method = RequestMethod.GET)
